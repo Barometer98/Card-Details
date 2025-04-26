@@ -3,11 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title>DVSA Card Payment - Dummy</title>
+  <script>
+    function toggleBillingAddress() {
+      const useDifferent = document.getElementById('billing-different').checked;
+      document.getElementById('different-address-section').style.display = useDifferent ? 'block' : 'none';
+    }
+  </script>
 </head>
 <body>
   <h1>Card Details</h1>
   <form>
     <label>Card Number: <input name="cardNumber" type="text"></label><br><br>
+    
     <label>Expiry Month:
       <select name="expiryMonth">
         <option value="">Select</option>
@@ -25,6 +32,7 @@
         <option value="12">12</option>
       </select>
     </label><br><br>
+    
     <label>Expiry Year:
       <select name="expiryYear">
         <option value="">Select</option>
@@ -33,12 +41,21 @@
         <option value="2027">2027</option>
       </select>
     </label><br><br>
+
     <label>Cardholder Name: <input name="cardholderName" type="text"></label><br><br>
     <label>Security Code (CVV): <input name="securityCode" type="text"></label><br><br>
-    
+
     <label>Select Billing Address:</label><br>
-    <input type="radio" name="billingAddress" value="candidate"> Use Candidate's Address<br>
-    <input type="radio" name="billingAddress" value="different"> Use a Different Address<br><br>
+    <input type="radio" id="billing-candidate" name="billingAddress" value="candidate" onchange="toggleBillingAddress()"> Use Candidate's Address<br>
+    <input type="radio" id="billing-different" name="billingAddress" value="different" onchange="toggleBillingAddress()"> Use a Different Address<br><br>
+
+    <div id="different-address-section" style="display: none;">
+      <h3>Different Billing Address</h3>
+      <label>Address Line 1: <input name="billingAddressLine1" type="text"></label><br><br>
+      <label>Address Line 2 (optional): <input name="billingAddressLine2" type="text"></label><br><br>
+      <label>Town/City: <input name="billingTown" type="text"></label><br><br>
+      <label>Postcode: <input name="billingPostcode" type="text"></label><br><br>
+    </div>
 
     <button type="button">Pay Now (Disabled in Dummy)</button>
   </form>
